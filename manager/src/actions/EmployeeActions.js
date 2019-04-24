@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import {
   EMPLOYEE_UPDATE,
   EMPLOYEE_CREATE_FAIL,
@@ -12,10 +14,15 @@ export const employeeUpdate = ({ prop, value }) => {
 };
 
 export const employeeCreate = ({ name, surname, phone, shift }) => {
-  console.log(name, surname, phone, shift);
-  return {
-    type: EMPLOYEE_CREATE_SUCCESS,
-    payload: { name, surname, phone, shift }
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees`)
+      .push({ name, surname, phone, shift })
+      .then(() => {
+        dispatch({ type: EMPLOYEE_CREATE_SUCCESS });
+        Actions.employeeList({ type: 'reset' });
+      });
   };
 };
 
