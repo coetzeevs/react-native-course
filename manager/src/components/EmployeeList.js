@@ -43,7 +43,7 @@ const mapStateToProps = state => {
     return { ...val, uid };
   });
 
-  return employees;
+  return { employees };
 };
 
 export default connect(mapStateToProps, { employeeFetch })(EmployeeList);
