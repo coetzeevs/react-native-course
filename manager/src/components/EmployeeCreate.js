@@ -5,10 +5,9 @@ import { employeeUpdate, employeeCreate, employeeCreateFail } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
-  onButtonPress(optionValue) {
-    console.log(optionValue);
+  onButtonPress() {
     const { name, surname, phone, shift } = this.props;
-    if (optionValue === 'None') {
+    if (shift === '') {
       console.log('yess mofo!');
       this.props.employeeCreateFail();
     } else {
@@ -58,15 +57,19 @@ class EmployeeCreate extends Component {
           />
         </CardSection>
 
-        <CardSection style={{ flexDirection: 'column' }}>
+        {this.renderError()}
+
+        <CardSection>
           <Text style={styles.pickerTextStyle}>Shift</Text>
-          {this.renderError()}
+        </CardSection>
+
+        <CardSection style={{ flexDirection: 'column' }}>
           <Picker
-            style={{ flex: 1 }}
+            style={{ height: 88 }} itemStyle={{ height: 88 }}
             selectedValue={this.props.shift}
             onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
           >
-            <Picker.Item label="Select option..." value="None" />
+            <Picker.Item label="Select option..." value="" />
             <Picker.Item label="Monday" value="Monday" />
             <Picker.Item label="Tuesday" value="Tuesday" />
             <Picker.Item label="Wednesday" value="Wednesday" />
@@ -91,7 +94,8 @@ class EmployeeCreate extends Component {
 const styles = {
   pickerTextStyle: {
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 20,
+    flex: 1
   },
   errorTextStyle: {
     fontSize: 20,
