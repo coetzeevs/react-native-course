@@ -16,7 +16,7 @@ class EmployeeList extends Component {
   }
 
   createDataSource({ employees }) {
-    const ds = new ListView.dataSource({
+    const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
@@ -32,7 +32,7 @@ class EmployeeList extends Component {
       <ListView
         enableEmptySections
         dataSource={this.dataSource}
-        rederRow={this.renderRow}
+        renderRow={this.renderRow}
       />
     );
   }
