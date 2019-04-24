@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   name: '',
   surname: '',
   phone: '',
-  shift: 'None',
+  shift: '',
   error: ''
 };
 
@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
         error: ''
       };
     case EMPLOYEE_CREATE_FAIL:
-      return { ...state, ...INITIAL_STATE, error: 'Please select a valid option.' };
+      return { ...state, error: 'Please select a valid option.' };
     case EMPLOYEE_CREATE_SUCCESS:
       return state;
     default:
