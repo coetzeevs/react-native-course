@@ -3,7 +3,8 @@ import { Actions } from 'react-native-router-flux';
 import {
   EMPLOYEE_UPDATE,
   EMPLOYEE_CREATE_FAIL,
-  EMPLOYEE_CREATE_SUCCESS
+  EMPLOYEE_CREATE_SUCCESS,
+  EMPLOYEES_FETCH_SUCCESS
 } from './types';
 
 export const employeeUpdate = ({ prop, value }) => {
@@ -29,5 +30,17 @@ export const employeeCreate = ({ name, surname, phone, shift }) => {
 export const employeeCreateFail = () => {
   return {
     type: EMPLOYEE_CREATE_FAIL
+  };
+};
+
+export const employeeFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees`)
+      .on('value', snapshot => {
+        dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
+      })
+      .then();
   };
 };
