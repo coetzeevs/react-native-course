@@ -5,10 +5,9 @@ import { employeeUpdate, employeeCreate, employeeCreateFail } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
-  onButtonPress(optionValue) {
-    console.log(optionValue);
+  onButtonPress() {
     const { name, surname, phone, shift } = this.props;
-    if (optionValue === 'None') {
+    if (shift === 'None') {
       console.log('yess mofo!');
       this.props.employeeCreateFail();
     } else {
@@ -58,9 +57,10 @@ class EmployeeCreate extends Component {
           />
         </CardSection>
 
+        {this.renderError()}
+
         <CardSection style={{ flexDirection: 'column' }}>
           <Text style={styles.pickerTextStyle}>Shift</Text>
-          {this.renderError()}
           <Picker
             style={{ flex: 1 }}
             selectedValue={this.props.shift}

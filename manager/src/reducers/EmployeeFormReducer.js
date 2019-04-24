@@ -1,6 +1,7 @@
 import {
   EMPLOYEE_UPDATE,
-  EMPLOYEE_CREATE_FAIL
+  EMPLOYEE_CREATE_FAIL,
+  EMPLOYEE_CREATE_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,7 +20,9 @@ export default (state = INITIAL_STATE, action) => {
         error: ''
       };
     case EMPLOYEE_CREATE_FAIL:
-      return { ...state, error: 'Please select a valid option.' };
+      return { ...state, ...INITIAL_STATE, error: 'Please select a valid option.' };
+    case EMPLOYEE_CREATE_SUCCESS:
+      return state;
     default:
       return state;
   }
