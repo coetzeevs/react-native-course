@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
     case EMPLOYEE_CREATE_FAIL:
       return { ...state, error: 'Please select a valid option.' };
     case EMPLOYEE_CREATE_SUCCESS:
-      return state;
+      return INITIAL_STATE;
     default:
       return state;
   }
