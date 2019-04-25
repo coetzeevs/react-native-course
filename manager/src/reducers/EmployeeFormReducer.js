@@ -1,7 +1,9 @@
 import {
   EMPLOYEE_UPDATE,
   SHIFT_SELECT_ERROR,
-  EMPLOYEE_CREATE_SUCCESS
+  EMPLOYEE_CREATE_SUCCESS,
+  EMPLOYEE_SAVE_SUCCESS,
+  INITIATE_ADD_EMPLOYEE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,6 +24,10 @@ export default (state = INITIAL_STATE, action) => {
     case SHIFT_SELECT_ERROR:
       return { ...state, error: 'Please select a valid option.' };
     case EMPLOYEE_CREATE_SUCCESS:
+      return INITIAL_STATE;
+    case EMPLOYEE_SAVE_SUCCESS:
+      return INITIAL_STATE;
+    case INITIATE_ADD_EMPLOYEE:
       return INITIAL_STATE;
     default:
       return state;

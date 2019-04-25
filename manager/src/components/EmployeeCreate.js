@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeCreate, shiftSelectError } from '../actions';
+import {
+  employeeUpdate,
+  employeeCreate,
+  shiftSelectError,
+  initiateAddEmployee
+} from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component {
+  componentWillMount() {
+    this.props.initiateAddEmployee();
+  }
+
   onButtonPress() {
     const { name, surname, phone, shift } = this.props;
     if (shift === '') {
@@ -42,5 +51,6 @@ export const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   employeeUpdate,
   employeeCreate,
-  shiftSelectError
+  shiftSelectError,
+  initiateAddEmployee
 })(EmployeeCreate);

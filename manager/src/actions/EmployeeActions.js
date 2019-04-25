@@ -4,7 +4,9 @@ import {
   EMPLOYEE_UPDATE,
   SHIFT_SELECT_ERROR,
   EMPLOYEE_CREATE_SUCCESS,
-  EMPLOYEES_FETCH_SUCCESS
+  EMPLOYEES_FETCH_SUCCESS,
+  EMPLOYEE_SAVE_SUCCESS,
+  INITIATE_ADD_EMPLOYEE
 } from './types';
 
 export const employeeUpdate = ({ prop, value }) => {
@@ -51,8 +53,14 @@ export const employeeSave = ({ name, surname, phone, shift, uid }) => {
     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
       .set({ name, surname, phone, shift })
       .then(() => {
-        dispatch({ type: EMPLOYEE_CREATE_SUCCESS });
+        dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
         Actions.employeeList({ type: 'reset' });
       });
+  };
+};
+
+export const initiateAddEmployee = () => {
+  return {
+    type: INITIATE_ADD_EMPLOYEE
   };
 };
