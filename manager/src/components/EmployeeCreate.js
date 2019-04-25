@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { employeeUpdate, employeeCreate, employeeCreateFail } from '../actions';
+import { employeeUpdate, employeeCreate, shiftSelectError } from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
@@ -8,7 +8,7 @@ class EmployeeCreate extends Component {
   onButtonPress() {
     const { name, surname, phone, shift } = this.props;
     if (shift === '') {
-      this.props.employeeCreateFail();
+      this.props.shiftSelectError();
     } else {
       this.props.employeeCreate({ name, surname, phone, shift });
     }
@@ -42,5 +42,5 @@ export const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   employeeUpdate,
   employeeCreate,
-  employeeCreateFail
+  shiftSelectError
 })(EmployeeCreate);

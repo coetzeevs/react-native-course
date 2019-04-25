@@ -5,6 +5,6 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 
 export const EMPLOYEE_UPDATE = 'employee_update';
-export const EMPLOYEE_CREATE_FAIL = 'employee_create_fail';
+export const SHIFT_SELECT_ERROR = 'shift_select_error';
 export const EMPLOYEE_CREATE_SUCCESS = 'employee_create_success';
 export const EMPLOYEES_FETCH_SUCCESS = 'employees_fetch_success';

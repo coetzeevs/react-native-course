@@ -1,6 +1,6 @@
 import {
   EMPLOYEE_UPDATE,
-  EMPLOYEE_CREATE_FAIL,
+  SHIFT_SELECT_ERROR,
   EMPLOYEE_CREATE_SUCCESS
 } from '../actions/types';
 
@@ -19,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
         [action.payload.prop]: action.payload.value,
         error: ''
       };
-    case EMPLOYEE_CREATE_FAIL:
+    case SHIFT_SELECT_ERROR:
       return { ...state, error: 'Please select a valid option.' };
     case EMPLOYEE_CREATE_SUCCESS:
       return INITIAL_STATE;

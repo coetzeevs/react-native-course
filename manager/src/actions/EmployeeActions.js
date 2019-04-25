@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
   EMPLOYEE_UPDATE,
-  EMPLOYEE_CREATE_FAIL,
+  SHIFT_SELECT_ERROR,
   EMPLOYEE_CREATE_SUCCESS,
   EMPLOYEES_FETCH_SUCCESS
 } from './types';
@@ -27,9 +27,9 @@ export const employeeCreate = ({ name, surname, phone, shift }) => {
   };
 };
 
-export const employeeCreateFail = () => {
+export const shiftSelectError = () => {
   return {
-    type: EMPLOYEE_CREATE_FAIL
+    type: SHIFT_SELECT_ERROR
   };
 };
 
