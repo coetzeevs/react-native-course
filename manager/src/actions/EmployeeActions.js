@@ -2,9 +2,11 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
   EMPLOYEE_UPDATE,
-  EMPLOYEE_CREATE_FAIL,
+  SHIFT_SELECT_ERROR,
   EMPLOYEE_CREATE_SUCCESS,
-  EMPLOYEES_FETCH_SUCCESS
+  EMPLOYEES_FETCH_SUCCESS,
+  EMPLOYEE_SAVE_SUCCESS,
+  INITIATE_ADD_EMPLOYEE
 } from './types';
 
 export const employeeUpdate = ({ prop, value }) => {
@@ -27,9 +29,9 @@ export const employeeCreate = ({ name, surname, phone, shift }) => {
   };
 };
 
-export const employeeCreateFail = () => {
+export const shiftSelectError = () => {
   return {
-    type: EMPLOYEE_CREATE_FAIL
+    type: SHIFT_SELECT_ERROR
   };
 };
 
@@ -40,7 +42,25 @@ export const employeeFetch = () => {
     firebase.database().ref(`/users/${currentUser.uid}/employees`)
       .on('value', snapshot => {
         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
-      })
-      .then();
+      });
+  };
+};
+
+export const employeeSave = ({ name, surname, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, surname, phone, shift })
+      .then(() => {
+        dispatch({ type: EMPLOYEE_SAVE_SUCCESS });
+        Actions.employeeList({ type: 'reset' });
+      });
+  };
+};
+
+export const initiateAddEmployee = () => {
+  return {
+    type: INITIATE_ADD_EMPLOYEE
   };
 };
