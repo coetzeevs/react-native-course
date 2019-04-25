@@ -59,13 +59,13 @@ class EmployeeCreate extends Component {
 
         {this.renderError()}
 
-        <CardSection>
+        <CardSection style={{ borderBottomWidth: 0 }}>
           <Text style={styles.pickerTextStyle}>Shift</Text>
         </CardSection>
 
         <CardSection style={{ flexDirection: 'column' }}>
           <Picker
-            style={{ height: 88 }} itemStyle={{ height: 88 }}
+            style={styles.pickerStyle} itemStyle={styles.pickerItemStyle}
             selectedValue={this.props.shift}
             onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
           >
@@ -94,8 +94,13 @@ class EmployeeCreate extends Component {
 const styles = {
   pickerTextStyle: {
     fontSize: 18,
-    paddingLeft: 20,
-    flex: 1
+    paddingLeft: 20
+  },
+  pickerStyle: {
+    height: 88
+  },
+  pickerItemStyle: {
+    height: 88
   },
   errorTextStyle: {
     fontSize: 20,
