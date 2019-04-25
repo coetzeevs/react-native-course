@@ -43,3 +43,16 @@ export const employeeFetch = () => {
       });
   };
 };
+
+export const employeeSave = ({ name, surname, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set({ name, surname, phone, shift })
+      .then(() => {
+        dispatch({ type: EMPLOYEE_CREATE_SUCCESS });
+        Actions.employeeList({ type: 'reset' });
+      });
+  };
+};

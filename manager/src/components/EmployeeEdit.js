@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EmployeeForm from './EmployeeForm';
-import { employeeUpdate, shiftSelectError } from '../actions';
+import { employeeUpdate, shiftSelectError, employeeSave } from '../actions';
 import { Card, CardSection, Button } from './common';
 
 class EmployeeEdit extends Component {
@@ -19,7 +19,7 @@ class EmployeeEdit extends Component {
       this.props.shiftSelectError();
     } else {
       console.log({ name, surname, phone, shift });
-      // this.props.employeeCreate({ name, surname, phone, shift });
+      this.props.employeeSave({ name, surname, phone, shift, uid: this.props.employee.uid });
     }
   }
 
@@ -42,4 +42,8 @@ const mapStateToProps = (state) => {
   return { name, surname, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate, shiftSelectError })(EmployeeEdit);
+export default connect(mapStateToProps, {
+  employeeUpdate,
+  shiftSelectError,
+  employeeSave
+})(EmployeeEdit);
